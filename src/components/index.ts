@@ -1,3 +1,10 @@
 export { default as Button } from './Button';
-export { default as Title } from './Title';
-export type { TitleProps } from './Title';
+export type { ButtonProps } from './Button';
+export { default as ButtonGroup } from './ButtonGroup';
+export type { ButtonGroupProps } from './ButtonGroup';
+export { default as Divider } from './Divider';
+export type { DividerProps } from './Divider';
+export { default as Icon } from './Icon';
+export type { IconProps } from './Icon';
+export { default as Space } from './Space';
+export type { SpaceProps } from './Space';
