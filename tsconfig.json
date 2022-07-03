@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "es5", //指定ECMAScript目标版本 "ES3"（默认）
+    "module": "commonjs", //指定生成哪个模块系统代码
+    "lib": ["DOM", "ESNext", "DOM.Iterable"], //指定要包含在编译中的库文件
+    "jsx": "react", //指定JSX代码生成：“ preserve”，“ react-native”或“ react”
+    "declaration": true, //生成相应的'.d.ts'文件
+    "declarationDir": "./lib", //.d.ts文件的输出路径
+    "outDir": "./lib", //输出路径
+    "rootDir": "./src", //打包文件路径
+    "strict": true, //启用严格检查
+    "esModuleInterop": true, //通过为所有导入创建名称空间对象，启用CommonJS和ES模块之间的发射互操作性。
+    "forceConsistentCasingInFileNames": true //禁止对同一文件使用大小写不一致的引用。
+  },
+  "exclude": ["./example/**/*", "node_modules", "lib"] //忽略编译文件
+}

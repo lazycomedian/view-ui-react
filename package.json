@@ -1,0 +1,44 @@
+{
+  "name": "view-ui-react",
+  "version": "0.1.0-3",
+  "description": "",
+  "scripts": {
+    "build:style": "rm -rf dist/styles && gulp --gulpfile scripts/build-style.js",
+    "package": "rm -rf ./lib && tsc"
+  },
+  "title": "View Design React",
+  "files": [
+    "lib",
+    "dist"
+  ],
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "keywords": [
+    "component",
+    "components",
+    "design",
+    "framework",
+    "frontend",
+    "react",
+    "react-component",
+    "ui",
+    "viewUi",
+    "iView"
+  ],
+  "author": "lazycomedian",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/react": "^18.0.14",
+    "typescript": "^4.7.4",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^8.0.0",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-less": "^5.0.0",
+    "gulp-rename": "^2.0.0",
+    "react": "^18.0.0"
+  },
+  "peerDependencies": {
+    "react": ">=16.9.0",
+    "react-dom": ">=16.9.0"
+  }
+}
