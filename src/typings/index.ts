@@ -23,6 +23,12 @@ export namespace IVU {
   export type Shape = 'circle' | 'circle-outline';
 
   /**
+   * 通用通知 / 消息类型分类
+   *
+   */
+  export type NotificationType = 'info' | 'success' | 'warning' | 'error' | 'loading';
+
+  /**
    * 提供的 icon图标名称
    *
    */

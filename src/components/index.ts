@@ -6,5 +6,7 @@ export { default as Divider } from './Divider';
 export type { DividerProps } from './Divider';
 export { default as Icon } from './Icon';
 export type { IconProps } from './Icon';
+export { default as Message } from './message';
+export { default as Notice } from './notice';
 export { default as Space } from './Space';
 export type { SpaceProps } from './Space';
