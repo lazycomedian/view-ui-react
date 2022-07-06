@@ -7,7 +7,8 @@
     font-size: @font-size-base;
     position: relative;
     //overflow: hidden;
-    transition: all @transition-time @ease-in-out;
+    // transition: all @transition-time @ease-in-out;
+    transition: all .3s @ease-in-out;
 
     &-bordered {
         border: 1px solid @border-color-base;
@@ -37,6 +38,15 @@
 
     &-head {
         .content-header;
+        display: flex;
+        align-items: center;
+
+        &-title{
+            flex: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
     }
 
     &-extra {

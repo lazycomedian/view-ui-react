@@ -224,6 +224,7 @@ class Notification extends Component<NotificationProps, NotificationState> {
               className={classNames(motionClassName, noticeProps?.className)}
               style={{ ...motionStyle, ...noticeProps?.style }}
               visible={visible}
+              noticeLength={noticeKeys.length}
             />
           );
         }}

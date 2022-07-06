@@ -1,13 +1,17 @@
 {
   "name": "view-ui-react",
   "version": "0.1.0-6",
-  "description": "",
+  "title": "View Design React",
+  "description": "The react version of ViewDesignPlus",
   "scripts": {
     "build:style": "rm -rf dist/styles && gulp --gulpfile scripts/build-style.js",
     "package": "rm -rf ./lib && tsc",
     "build": "yarn build:style && yarn package"
   },
-  "title": "View Design React",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lazycomedian/view-ui-react.git"
+  },
   "files": [
     "lib",
     "dist",
@@ -28,7 +32,7 @@
     "iView"
   ],
   "author": "lazycomedian",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@types/node": "^18.0.1",
     "@types/react": "^18.0.14",

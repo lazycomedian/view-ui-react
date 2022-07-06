@@ -35,6 +35,8 @@ class NotificationFactory implements NotificationFactoryArgs {
     this.prefixKey = args.prefixCls;
     this.iconTypes = args.iconTypes;
     this.transitionName = args.transitionName;
+
+    this.getInstance();
   }
 
   /**

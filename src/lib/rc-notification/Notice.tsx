@@ -29,6 +29,8 @@ export interface NoticeProps {
   /** 是否开启子消息实例销毁时高度变化过度 */
   isLeaveHeightEffect?: boolean;
 
+  noticeLength?: number;
+
   /**
    * 试用方法传入content
    */
@@ -92,7 +94,7 @@ export default class Notice extends Component<NoticeProps, NoticeState> {
   handleLeave() {
     if (!this.props.isLeaveHeightEffect || !this.el) return;
     // 优化一下，如果当前只有一个 Message，则不使用 js 过渡动画，这样更优美
-    if (isClient && document.getElementsByClassName('ivu-message-notice').length !== 1) {
+    if (isClient && this.props.noticeLength !== 1) {
       this.el.style.height = '0px';
       this.el.style.paddingTop = '0px';
       this.el.style.paddingBottom = '0px';
