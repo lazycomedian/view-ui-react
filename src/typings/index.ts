@@ -33,6 +33,7 @@ export namespace IVU {
    *
    */
   export type IconType =
+    /** 🤣 */
     | 'ios-add-circle-outline'
     | 'ios-add-circle'
     | 'ios-add'
