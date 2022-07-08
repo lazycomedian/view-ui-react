@@ -1,14 +1,13 @@
 {
   "name": "view-ui-react",
-  "version": "0.1.0-6",
+  "version": "0.1.0-10",
   "title": "View Design React",
   "description": "The react version of ViewDesignPlus",
   "scripts": {
     "build:style": "rm -rf dist/styles && gulp --gulpfile scripts/build-style.js",
     "package": "rm -rf ./lib && tsc",
     "build": "yarn build:style && yarn package",
-    "checkVersion": "sh scripts/version.sh",
-    "postpublish": "npm  --no-git-tag-version version patch &&  PACKAGE_VERSION=$(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]') && git commit -am  $PACKAGE_VERSION && git tag $PACKAGE_VERSION"
+    "publish:prod": "sh scripts/publish.sh"
   },
   "repository": {
     "type": "git",

@@ -8,7 +8,7 @@ const prefixKey = 'ivu_notice_key_';
 
 const transitionName = 'move-notice';
 
-const iconTypes: Record<Exclude<IVU.NotificationType, 'loading'>, IVU.IconType> = {
+const iconTypes: Record<IVU.NotificationType, IVU.IconType> = {
   info: 'ios-information-circle',
   success: 'ios-checkmark-circle',
   warning: 'ios-alert',

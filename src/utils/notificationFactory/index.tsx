@@ -3,7 +3,7 @@ import React, { isValidElement } from 'react';
 import Notification, { NotificationInstance } from '../../lib/rc-notification';
 import { NoticeContent } from '../../lib/rc-notification/Notification';
 import { IVU } from '../../typings';
-import type { DefaultConfig, ExtractStringReactNode, MessageOption, NoticeOption, NotificationFactoryArgs } from './types';
+import type { DefaultConfig, MessageOption, NoticeOption, NotificationFactoryArgs } from './types';
 
 class NotificationFactory implements NotificationFactoryArgs {
   private instance: NotificationInstance | null = null;
@@ -55,6 +55,10 @@ class NotificationFactory implements NotificationFactoryArgs {
           maxCount: this.defaultConfig.maxCount,
         },
         notificationInstance => {
+          // 在回调中二次判断实例是否已存在
+          // 避免同时创建多个实例时引发的dom并发创建问题
+          if (this.instance) return resolve(this.instance);
+
           this.instance = notificationInstance;
           resolve(notificationInstance);
         },
@@ -97,21 +101,21 @@ class NotificationFactory implements NotificationFactoryArgs {
    * @param options 配置项
    * @returns
    */
-  public message(type: IVU.NotificationType, options: MessageOption | ExtractStringReactNode): Promise<() => void> {
-    const isReactElement = (typeof options === 'object' && isValidElement(options)) || typeof options === 'string';
-
-    const iconType = this.iconTypes[type];
-
-    // if loading
-    const loadCls = type === 'loading' ? ' ivu-load-loop' : '';
+  public async message(type: IVU.NotificationType | 'loading', options: MessageOption | React.ReactNode) {
+    const isMessageOption = !!options && typeof options === 'object' && !isValidElement(options);
 
     /** 自定义构建message content */
     const contentStruct: NoticeContent['contentStruct'] = ({ closeIcon, onRef }) => {
+      const iconType = this.iconTypes[type];
+
+      // if loading
+      const loadCls = type === 'loading' ? ' ivu-load-loop' : '';
+
       const componentClass = `${this.prefixCls}-notice`;
 
       const messageContentClasses = classNames(`${componentClass}-content`, {
         [`${componentClass}-content-${type}`]: type,
-        [`${componentClass}-content-background`]: !isReactElement && (options as MessageOption).background,
+        [`${componentClass}-content-background`]: isMessageOption && (options as MessageOption).background,
       });
 
       return (
@@ -119,7 +123,7 @@ class NotificationFactory implements NotificationFactoryArgs {
           <div className={`${componentClass}-content-text`}>
             <div className={`${this.prefixCls}-custom-content ${this.prefixCls}-${type}`}>
               <i className={`${NotificationFactory.iconPrefixCls} ${NotificationFactory.iconPrefixCls}-${iconType} ${loadCls}`} />
-              <span>{isReactElement ? options : (options as MessageOption).content}</span>
+              <span>{isMessageOption ? (options as MessageOption).content : options}</span>
             </div>
           </div>
           <div className={`${componentClass}-content-text`}></div>
@@ -128,7 +132,7 @@ class NotificationFactory implements NotificationFactoryArgs {
       );
     };
 
-    const finalOptions = isReactElement ? { contentStruct } : { ...options, contentStruct };
+    const finalOptions = isMessageOption ? { ...options, contentStruct } : { contentStruct };
 
     return this.create({ ...finalOptions, isLeaveHeightEffect: true });
   }
@@ -140,7 +144,7 @@ class NotificationFactory implements NotificationFactoryArgs {
    * @param options 配置项
    * @returns
    */
-  public notice(type: Exclude<IVU.NotificationType, 'loading'> | 'normal', options: NoticeOption): Promise<() => void> {
+  public async notice(type: IVU.NotificationType | 'normal', options: NoticeOption) {
     const iconType = this.iconTypes[type];
 
     /** 自定义构建notice content */
@@ -175,7 +179,7 @@ class NotificationFactory implements NotificationFactoryArgs {
                 <span className={`${this.prefixCls}-icon ${this.prefixCls}-icon-${type}`}>
                   <i
                     className={`${NotificationFactory.iconPrefixCls} ${NotificationFactory.iconPrefixCls}-${iconType}${outlineIcon}`}
-                  ></i>
+                  />
                 </span>
                 <div className={`${this.prefixCls}-title`}>{options.title}</div>
                 <div className={`${this.prefixCls}-desc`}>{options.desc}</div>

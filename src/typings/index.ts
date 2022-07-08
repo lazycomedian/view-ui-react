@@ -26,7 +26,7 @@ export namespace IVU {
    * 通用通知 / 消息类型分类
    *
    */
-  export type NotificationType = 'info' | 'success' | 'warning' | 'error' | 'loading';
+  export type NotificationType = 'info' | 'success' | 'warning' | 'error';
 
   /**
    * 提供的 icon图标名称

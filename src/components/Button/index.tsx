@@ -33,11 +33,11 @@ export interface ButtonProps extends Omit<NativeButtonProps, 'type'> {
   /** 设置 button 原生的 type，可选值为 button、submit、reset */
   htmlType?: 'button' | 'submit' | 'reset';
 
-  /** 设置按钮的图标类型 */
-  icon?: IVU.IconType;
+  /** 设置按钮的图标类型 从官方提供的图库中选择 */
+  iconType?: IVU.IconType;
 
   /** 设置按钮的自定义图标 */
-  customIcon?: string;
+  icon?: React.ReactNode;
 }
 
 const Button: React.FC<ButtonProps> & { Group: typeof ButtonGroup } = props => {
@@ -52,8 +52,8 @@ const Button: React.FC<ButtonProps> & { Group: typeof ButtonGroup } = props => {
     loading = false,
     disabled,
     className,
+    iconType,
     icon,
-    customIcon,
     ...restProps
   } = props;
 
@@ -65,7 +65,7 @@ const Button: React.FC<ButtonProps> & { Group: typeof ButtonGroup } = props => {
       [`${prefixCls}-${shape}`]: !!shape,
       [`${prefixCls}-${size}`]: size !== 'default',
       [`${prefixCls}-loading`]: loading != null && loading,
-      [`${prefixCls}-icon-only`]: !children && (!!icon || !!customIcon || loading),
+      [`${prefixCls}-icon-only`]: !children && (!!icon || !!iconType || loading),
       [`${prefixCls}-ghost`]: ghost,
     },
     className,
@@ -73,7 +73,8 @@ const Button: React.FC<ButtonProps> & { Group: typeof ButtonGroup } = props => {
 
   const prefixChildren: React.ReactNode[] = [
     loading && <Icon className="ivu-load-loop" key="loading" type="ios-loading" />,
-    (icon || customIcon) && !loading && <Icon custom={customIcon} key="custom" type={icon} />,
+    !icon && !!iconType && !loading && <Icon key="custom" type={iconType} />,
+    icon && icon,
     !!children && <span key="placeholder"></span>,
   ].filter(Boolean);
 

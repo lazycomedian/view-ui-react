@@ -1,6 +1,6 @@
 import { IVU } from '../../typings';
 import NotificationFactory from '../../utils/notificationFactory';
-import { ExtractStringReactNode, MessageOption } from '../../utils/notificationFactory/types';
+import { MessageOption } from '../../utils/notificationFactory/types';
 
 const prefixCls = 'ivu-message';
 
@@ -8,7 +8,7 @@ const prefixKey = 'ivu_message_key_';
 
 const transitionName = 'move-up';
 
-const iconTypes: Record<IVU.NotificationType, IVU.IconType> = {
+const iconTypes: Record<IVU.NotificationType | 'loading', IVU.IconType> = {
   info: 'ios-information-circle',
   success: 'ios-checkmark-circle',
   warning: 'ios-alert',
@@ -24,7 +24,7 @@ const notificationFactory = new NotificationFactory({
   transitionName,
 });
 
-type Options = MessageOption | ExtractStringReactNode;
+type Options = MessageOption | React.ReactNode;
 
 export default {
   info: (options: Options) => notificationFactory.message('info', options),

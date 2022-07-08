@@ -11,7 +11,7 @@ export interface MessageOption {
    *
    * @override
    */
-  content?: ExtractStringReactNode;
+  content: React.ReactNode;
 
   /** 自动关闭的延时，单位秒，不关闭可以写 0 */
   duration?: number;
